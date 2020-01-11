@@ -7,7 +7,7 @@ const getNotes = () => {
 
 const addNote = (title, body) => {
     const notes = loadNotes() 
-    const duplicateNotes = notes.filter((note) => { return note.title === title })
+    const duplicateNotes = notes.filter((note) => note.title === title )
 
     if (duplicateNotes.length === 0){
         notes.push({
@@ -23,7 +23,7 @@ const addNote = (title, body) => {
 
 const removeNote = (title) => {
     const notes = loadNotes() 
-    const remainingNotes = notes.filter((note) => { return note.title !== title })
+    const remainingNotes = notes.filter((note) => note.title !== title )
     console.log(remainingNotes)
 
     if (remainingNotes.length === notes.length){
@@ -32,6 +32,14 @@ const removeNote = (title) => {
         saveNotes(remainingNotes)    
         console.log(chalk.green('The note ' + chalk.bold(title) + ' has been removed!'))
     }
+}
+
+const listNotes = () => {
+    const notes = loadNotes()
+    console.log(chalk.bgCyan('Your notes...'))
+    notes.forEach( (note) => {
+        console.log(note.title)
+    });
 }
 
 const saveNotes = (notes) => {
@@ -53,5 +61,6 @@ const loadNotes = () => {
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 } 
